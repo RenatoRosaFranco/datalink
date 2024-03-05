@@ -7,6 +7,7 @@
 #  id                     :integer          not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  kind                   :integer
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -21,4 +22,13 @@
 class UserSerializer
   include FastJsonapi::ObjectSerializer
   attributes :id, :email
+
+  # Associations
+  has_one :image, serializer: ImageSerializer
+
+  # Attributes
+  attribute :kind, &:user? ? 'user' : 'default'
+  attribute :image_url do |object|
+    ImageHelper.image_path(object)
+  end
 end

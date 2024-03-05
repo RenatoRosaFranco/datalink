@@ -27,6 +27,7 @@ class PlaceSerializer
   attributes :id, :name, :location
 
   # Associations
+  has_many :images, as: :imageable
   belongs_to :place_type
 
   # Attributes

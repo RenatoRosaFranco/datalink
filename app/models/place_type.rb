@@ -8,7 +8,6 @@
 #  updated_at :datetime         not null
 #
 class PlaceType < ApplicationRecord
-
 	# Associations
 	has_many :places, dependent: :destroy
 end

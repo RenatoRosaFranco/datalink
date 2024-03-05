@@ -22,6 +22,7 @@
 #
 class Place < ApplicationRecord
   # Associations
+  has_many :images, as: :imageable
   belongs_to :place_type
   belongs_to :user
 end

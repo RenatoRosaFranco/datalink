@@ -7,16 +7,11 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.order(created_at: :desc)
-
-		render json: {
-			users: serialize_obj(UserSerializer, @users)
-		}, status: :ok
+		render_response(:users, @users, UserSerializer)
 	end
 
 	def show
-		render json: {
-			user: serialize_obj(UserSerializer, @user)
-		}, status: :ok
+		render_response(:user, @user, UserSerializer)
 	end
 
 	private

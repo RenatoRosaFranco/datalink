@@ -7,16 +7,11 @@ class PlacesController < ApplicationController
 
 	def index
 		@places = Place.order(created_at: :desc)
-    
-    render json: { 
-    	places: serialize_obj(PlaceSerializer, @places) 
-    }, status: :ok
+    render_response(:places, @places, PlaceSerializer)
 	end
 
 	def show
-    render json: {
-    	place: serialize_obj(PlaceSerializer, @place)
-    }, status: :ok
+   	render_response(:place, @place, PlaceSerializer)
 	end
 
 	private

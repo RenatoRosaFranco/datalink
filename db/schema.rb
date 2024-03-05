@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_05_172939) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_05_220228) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_172939) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "city_hall_sectors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "file"
+    t.string "imageable_type"
+    t.integer "imageable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "place_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -56,6 +70,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_172939) do
     t.index ["user_id"], name: "index_places_on_user_id"
   end
 
+  create_table "tickets", force: :cascade do |t|
+    t.integer "kind"
+    t.text "description"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -64,6 +88,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_172939) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "kind"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -72,4 +97,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_172939) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "places", "place_types"
   add_foreign_key "places", "users"
+  add_foreign_key "tickets", "users"
 end

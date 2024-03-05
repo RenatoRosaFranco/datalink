@@ -5,6 +5,7 @@
 #  id                     :integer          not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  kind                   :integer
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -17,7 +18,14 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+
+  # Enum
+  enum kind: { user: 0, gestor: 1 }
+
+  # Associations
+  has_one :image, as: :imageable
   has_many :places, dependent: :destroy
+  has_many :tickets, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

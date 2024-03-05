@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :tickets
+  resources :reviews
+  resources :city_hall_sectors
+
   with_options only: [:index, :show] do
     resources :places
     resources :place_types

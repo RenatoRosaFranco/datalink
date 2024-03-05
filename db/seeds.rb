@@ -7,3 +7,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+CityHallSector.destroy_all
+CityHallSector.create(
+	[
+		{ name: 'Obras e Serviços' },
+		{ name: 'Mobilidade e Trânsito' },
+		{ name: 'Segurança' },
+		{ name: 'Saúde' },
+		{ name: 'Educação' },
+		{ name: 'Cultura' },
+		{ name: 'Esporte e Lazer' }
+	]
+)
